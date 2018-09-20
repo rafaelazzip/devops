@@ -4,7 +4,7 @@ pipeline {
        stage('Build da aplicação') { 
             steps {
                 sh 'echo build da aplicação'
-                sh 'mvn clean package Dockerfile:build' 
+                sh 'mvn clean package' 
             }
         }
         stage('build da imagem') {
