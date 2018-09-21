@@ -32,7 +32,9 @@ pipeline {
             }
         }
         stage('#6 Deploy') {
-         sh 'docker run -d -p 80:9090 desafio-devops:1.0'
+         steps {
+             sh 'docker run -d -p 80:9090 desafio-devops:1.0'
+         }
         }
     }
 }
