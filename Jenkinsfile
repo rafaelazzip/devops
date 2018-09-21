@@ -8,7 +8,7 @@ pipeline {
        }
        stage('#2 Testes') { 
             steps {
-               sh 'echo testes'  
+               sh 'mvn test'  
             }
         }
        stage('#3 Package') { 
