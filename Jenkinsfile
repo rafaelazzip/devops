@@ -26,9 +26,8 @@ pipeline {
         stage('#5 Upload docker image') {
             steps {
                 sh 'echo subindo para o dockerhub'
-                sh 'docker tag desafio-devops:1.0 brunohafonso95/desafio-devops:1.0'
-                sh 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
-                sh 'docker push brunohafonso95/desafio-devops:1.0'
+                sh 'docker tag desafio-devops:1.0 192.168.56.101:5000/desafio-devops:1.0'
+                sh 'docker push 192.168.56.101:5000/desafio-devops:1.0'
             }
         }
         stage('#6 Deploy') {
