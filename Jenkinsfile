@@ -8,7 +8,7 @@ pipeline {
        }
        stage('#2 Testes') { 
             steps {
-                 
+               sh 'echo testes'  
             }
         }
        stage('#3 Package') { 
