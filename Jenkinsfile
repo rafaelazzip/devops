@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'echo subindo para o dockerhub'
                 sh 'docker tag desafio-devops:1.0 brunohafonso95/desafio-devops:1.0'
-               sh 'docker login'
+                sh 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
                 sh 'docker push brunohafonso95/desafio-devops:1.0'
             }
         }
