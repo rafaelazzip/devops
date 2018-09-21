@@ -13,12 +13,6 @@ pipeline {
                 sh 'docker build --tag desafio-devops:1.0 .'
             }
         }
-        stage('rodando a aplicação num container') {
-            steps {
-                sh 'echo rodando aplicação num container'
-                sh 'docker run -d --name desafio-devops -p 90:9090 desafio-devops:1.0'
-            }
-        }
         stage ('subindo para o dockerhub') {
             steps {
                 sh 'echo subindo para o dockerhub'
