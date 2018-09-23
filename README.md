@@ -273,7 +273,8 @@ pipeline {
             # passos do estagio
             steps {
                 # inserindo credencials de acesso em forma de injeção de variaveis
-                withCredentials([string(credentialsId: 'user_name', variable: 'USER_NAME'), string(credentialsId: 'user_password', variable: 'USER_PASSWORD')]) {
+                withCredentials([string(credentialsId: 'user_name', variable: 'USER_NAME'), 
+                string(credentialsId: 'user_password', variable: 'USER_PASSWORD')]) {
                     # preparando imagem para push no dockerhub
                     sh 'docker tag desafio-devops:1.0 brunohafonso95/desafio-jps:1.0'
                     # efetuando o login com as credenciais injetadas
@@ -308,7 +309,8 @@ pipeline {
 ![passo 6 jenkins](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/jenkins_6.png "passo 6 jenkins")
 
     No campo Secret preencher o nome do usuário do dockerhub e no campo ID preencher com user_name e clicar em
-    ok, repetir o mesmo processo para a senha informando o campo Secret com o senha do dockerhub e o campo ID com user_password
+    ok, repetir o mesmo processo para a senha informando o campo Secret com o senha do dockerhub 
+    e o campo ID com user_password
 
 6. Voltar para o painel inicial do jenkins e clicar na pipeline criada, após isso clicar em construir agora 
 para iniciar um build da aplicação, o mesmo irá aparecer em histórico de builds, clique nele e acompanhe o status do build em saída do console.
