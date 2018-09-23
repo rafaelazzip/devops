@@ -185,9 +185,18 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
     Aguardar a o download da imagem e o inicio do container, após acessar http://ip:9000, 
     logar com o usuário admin e senha admin, ao logar seguir os seguintes passos:
 
-    1. digitar um nome e clicar em generate
+    1. digitar um nome e clicar em generate e depois continue
 
 ![passo 1 sonarqube](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/sonarqube_1.png "passo 1 sonarqube")
+
+    2. selecionar JAVA e MAVEN
+
+![passo 2 sonarqube](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/sonarqube_2.png "passo 2 sonarqube")
+
+    3. clicar em copy para copiar o camando de execução do sonarqube
+
+![passo 3 sonarqube](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/sonarqube_3.png "passo 3 sonarqube")
+
 
 
 
