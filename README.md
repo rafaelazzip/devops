@@ -5,7 +5,8 @@
 
 ### 1. Configurando o proxy da máquina virtual para utilizar as ferramentas e desativando o firewall
 
-    Digite estes comandos no terminal da vm (substitua $proxyUser e $proxyPassword pelo seu usuário e senha do proxy e trocar o endereço do proxy pelo proxy da sua empresa)
+    Digite estes comandos no terminal da vm (substitua $proxyUser e $proxyPassword pelo seu usuário e 
+    senha do proxy e trocar o endereço do proxy pelo proxy da sua empresa)
 
 ```shell
 git config --global http.proxy http://$proxyUser:$proxyPassword@proxy.com:porta
@@ -135,6 +136,14 @@ mvn --version
     Default locale: en_US, platform encoding: UTF-8
     OS name: "linux", version: "3.10.0-862.11.6.el7.x86_64", arch: "amd64", family: "unix"
 
+    Para configurar o proxy do maven deve se digitar o seguinte comando no terminal:
+
+```shell
+vi /usr/local/maven/apache-maven-3.3.9/conf/settings.xml
+```
+
+    Ao abrir o arquivo procurar por proxy e preencher as credenciais do proxy da sua rede
+
 ### 5. Instalando e Configurando o Jenkins
 
     Para instalar digitar o seguinte comando no terminal:
@@ -145,21 +154,41 @@ systemctl enable jenkins
 systemctl start jenkins jenkins
 ```
 
-    Digite no navegador o ip ou dns do servidor e a porta da seguinte forma http://ip:8080 e seguir os passos da instalação
+    Digite no navegador o ip ou dns do servidor e a porta da seguinte forma http://ip:8080 e seguir os 
+    passos da instalação
 
-    + no primeiro passo será solicitado o secret, acessar o endereço informado na tela para pegar esse secret
+    no primeiro passo será solicitado o secret, acessar o endereço informado na tela para pegar esse secret
 
-    + configurar proxy passando as credenciais o link deve ser sem http://
+    configurar proxy passando as credenciais o link deve ser sem http://
 
-    + selecionar a opção de instalar suggestd plugins
+    selecionar a opção de instalar suggestd plugins
 
-    +  configurar usuário admin (anotar este usuário e senha, pois eles serão necessários para usar a ferramenta.)
+    configurar usuário admin (anotar este usuário e senha, pois eles serão 
+    necessários para usar a ferramenta.)
 
     Adicionar o jenkins no grupo do docker para que o mesmo tenha permissão de utiliza-lo, execute no terminal:
 
 ```shell
 usermod -aG docker jenkins
+usermod -aG root jenkins
+chmod 777 /var/run/docker.sock
 ```
+
+### 6. Instalando e configurando o SonarQube
+
+    Executar no terminal
+
+```shell
+docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+```
+
+    Aguardar a o download da imagem e o inicio do container, após acessar http://ip:9000, logar com o usuário admin e senha admin, ao logar seguir os seguintes passos:
+
+    1. digitar um nome e clicar em generate
+
+    ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+
 
 
 
