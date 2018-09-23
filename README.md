@@ -187,7 +187,7 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
     1. digitar um nome e clicar em generate
 
-![passo 1 sonarqube](../images/sonarqube_1.png "passo 1 sonarqube")
+![passo 1 sonarqube](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/sonarqube_1.png "passo 1 sonarqube")
 
 
 
