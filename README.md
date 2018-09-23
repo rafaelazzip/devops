@@ -147,13 +147,13 @@ systemctl start jenkins jenkins
 
     Digite no navegador o ip ou dns do servidor e a porta da seguinte forma http://ip:8080 e seguir os passos da instalação
 
-    ..* no primeiro passo será solicitado o secret, acessar o endereço informado na tela para pegar esse secret
+    + no primeiro passo será solicitado o secret, acessar o endereço informado na tela para pegar esse secret
 
-    ..* configurar proxy passando as credenciais o link deve ser sem http://
+    + configurar proxy passando as credenciais o link deve ser sem http://
 
-    ..* selecionar a opção de instalar suggestd plugins
+    + selecionar a opção de instalar suggestd plugins
 
-    ..*  configurar usuário admin (anotar este usuário e senha, pois eles serão necessários para usar a ferramenta.)
+    +  configurar usuário admin (anotar este usuário e senha, pois eles serão necessários para usar a ferramenta.)
 
     Adicionar o jenkins no grupo do docker para que o mesmo tenha permissão de utiliza-lo, execute no terminal:
 
