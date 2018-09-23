@@ -2,7 +2,8 @@
 
 ## Antes de tudo é necessário configurar o proxy para evitar inconvenientes
 
-1. Configurando o proxy da máquina virtual para utilizar as ferramentas e desativando o firewall
+
+### 1. Configurando o proxy da máquina virtual para utilizar as ferramentas e desativando o firewall
 
     Digite estes comandos no terminal da vm (substitua $proxyUser e $proxyPassword pelo seu usuário e senha do proxy e trocar o endereço do proxy pelo proxy da sua empresa)
 
@@ -25,8 +26,9 @@
     export no_proxy="localhost,127.0.0.0,192.168.56.101,172.20.148.72"
     export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/jre/bin/java"
     ```
-    
-2. Instalando e Configurando o docker
+
+
+### 2. Instalando e Configurando o docker
 
     digitar no terminal
 
@@ -80,7 +82,8 @@
     Hello from Docker!
     This message shows that your installation appears to be working correctly.
 
-3. Instalando e configurando o JDK
+
+### 3. Instalando e configurando o JDK
 Executar no terminal o seguinte comando
 
 
