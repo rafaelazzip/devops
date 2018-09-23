@@ -32,7 +32,7 @@
 
     digitar no terminal
 
-    ```shell
+    ```
     setenforce 0
     vi /etc/selinux/config
     ```
@@ -53,7 +53,7 @@
 
     Após isso instalar e iniciar o docker usando os seguintes comandos:
 
-    ```shell
+    ```
     curl -s https://get.docker.com | bash
     systemctl enable docker.service
     systemctl start docker.service
@@ -61,7 +61,7 @@
     ```
     Para configurar o proxy do docker usar o seguinte comando:
 
-    ```shell
+    ```
     mkdir /etc/systemd/system/docker.service.d
     cd /etc/systemd/system/docker.service.d
     vi http-proxy.conf
@@ -74,9 +74,10 @@
 
     Para testar digite o seguinte comando no terminal:
 
-    ```shell
+    ```
     docker run hello-world
     ```
+
     Esse comando deve retornar a seguinte mensagem
 
     Hello from Docker!
