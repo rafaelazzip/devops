@@ -186,7 +186,7 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
     1. digitar um nome e clicar em generate
 
-    ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 
 
