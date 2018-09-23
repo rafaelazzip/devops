@@ -197,10 +197,123 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
 ![passo 3 sonarqube](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/sonarqube_3.png "passo 3 sonarqube")
 
+    E a configuração do sonarqube estará finalizada 
 
+    Você deve salvar esta comando pois ele será necessário na configuração da pipeline
 
+```shell
+mvn sonar:sonar -Dsonar.host.url=http://192.168.56.101:9000 -Dsonar.login=108ad501c37119c6ec07a65bbf7dacaf71b48a1d
+```
 
+### 7. Configurando pipeline no Jenkins
 
+1. Clicar em novo job definir um nome, selecionar pipeline e clicar em ok
+
+![passo 1 jenkins](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/jenkins_1.png "passo 1 jenkins")
+
+2. Ir até a seção de Build Triggers, selecionar Consultar periodicamente o SCM 
+e preencher o campo que será habilitado com "* * * * *" 
+(Obs: o espaço entra os asteriscos é proposital)
+
+![passo 2 jenkins](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/jenkins_2.png "passo 2 jenkins")
+
+3. Ir até a Pipeline e o campo definition deixar como pipeline script e preencher o 
+campo script com o código da pipeline:
+
+```shell
+# bloco da pipeline o script todo fica dentro de bloco
+pipeline {
+   # qual agente quefara os processos, pode ser um container docker, 
+   # neste caso ele vai executar no agent que está disponivel por isso a marcação any
+   agent any
+    # bloco onde ficam os estagio de execução da pipeline
+    stages {
+       # bloco do primeiro estagio clone do repositorio
+       stage('#1 Git') {
+            # passos do estagio
+            steps {
+                # neste passo está sendo feito o clone do repositorio
+                git 'https://github.com/brunohafonso95/desafio-devops.git'
+            }  
+       }
+       # bloco do segundo estagio
+       stage('#2 SonarQube analise') {
+            # passos do estagio
+            steps {
+                # executando o sonarqube no projeto
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.56.101:9000 -Dsonar.login=108ad501c37119c6ec07a65bbf7dacaf71b48a1d'
+            }
+       }
+       # bloco do terceiro estagio
+       stage('#3 Testes') { 
+            # passos do estagio
+            steps {
+               # executando os testes da aplicação
+               sh 'mvn test'  
+            }
+        }
+        # bloco do quarto estagio
+       stage('#4 Package') { 
+            # passos do estagio
+            steps {
+                # buildando a aplicação
+                sh 'mvn clean package' 
+            }
+        }
+        # bloco do quinto estagio
+        stage('#5 Docker image') {
+            # passos do estagio
+            steps {
+                # gerando o imagem com a aplicação
+                sh 'docker build --tag desafio-devops:1.0 .'
+            }
+        }
+        # bloco do sexto estagio
+        stage('#6 Upload docker image') {
+            # passos do estagio
+            steps {
+                # inserindo credencials de acesso em forma de injeção de variaveis
+                withCredentials([string(credentialsId: 'user_name', variable: 'USER_NAME'), string(credentialsId: 'user_password', variable: 'USER_PASSWORD')]) {
+                    # preparando imagem para push no dockerhub
+                    sh 'docker tag desafio-devops:1.0 brunohafonso95/desafio-jps:1.0'
+                    # efetuando o login com as credenciais injetadas
+                    sh 'docker login -u $USER_NAME -p $USER_PASSWORD'
+                    # fazendo o push da imagem para o docker hub
+                    sh 'docker push brunohafonso95/desafio-jps:1.0'
+                }
+            }
+        }
+        # bloco do setimo estagio
+        stage('#7 Deploy') {
+            # passos do estagio
+            steps {
+                # rodando o a imagem da aplicação num container
+                sh 'docker run -d -p 82:8080 desafio-devops:1.0'
+            }
+        }
+    }
+}
+```
+
+4. Clicar em aplicar e salvar
+
+5. Configurar as credenciais de acesso ao dockerhub
+
+    Clicar em credentials no painel inicial do Jenkins depois clicar em system abaixo de credentials e depois do lado esquerdo clicar em global credentials
+
+![passo 5 jenkins](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/jenkins_5.png "passo 5 jenkins")
+
+    Clicar em add credentials e no campo Kind selecionar secret text
+
+![passo 6 jenkins](https://raw.githubusercontent.com/brunohafonso95/desafio-devops/master/images/jenkins_6.png "passo 6 jenkins")
+
+    No campo Secret preencher o nome do usuário do dockerhub e no campo ID preencher com user_name e clicar em
+    ok, repetir o mesmo processo para a senha informando o campo Secret com o senha do dockerhub e o campo ID com user_password
+
+6. Voltar para o painel inicial do jenkins e clicar na pipeline criada, após isso clicar em construir agora 
+para iniciar um build da aplicação, o mesmo irá aparecer em histórico de builds, clique nele e acompanhe o status do build em saída do console.
+
+### se tudo estiver certo e configurado e o nosso amigo proxy colaborar o build será executado com sucesso e você poderá ver a aplicação rodando em http://ip:82.
 
 
 
