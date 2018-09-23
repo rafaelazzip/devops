@@ -182,11 +182,12 @@ chmod 777 /var/run/docker.sock
 docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 ```
 
-    Aguardar a o download da imagem e o inicio do container, após acessar http://ip:9000, logar com o usuário admin e senha admin, ao logar seguir os seguintes passos:
+    Aguardar a o download da imagem e o inicio do container, após acessar http://ip:9000, 
+    logar com o usuário admin e senha admin, ao logar seguir os seguintes passos:
 
     1. digitar um nome e clicar em generate
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![passo 1 sonarqube](../images/sonarqube_1.png "passo 1 sonarqube")
 
 
 
