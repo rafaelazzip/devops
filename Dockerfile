@@ -1,3 +1,4 @@
+# imagem alpine do jdk 
 FROM java:8-jdk-alpine
 VOLUME /tmp
 COPY target/site2*.jar app.jar
